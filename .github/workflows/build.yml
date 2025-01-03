@@ -29,7 +29,7 @@ jobs:
         run: arm-none-eabi-strip target/armv7-unknown-linux-gnueabihf/release/bustd
           
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 'bustd-linux-armv7-glibc'
           path: target/armv7-unknown-linux-gnueabihf/release/bustd
@@ -61,7 +61,7 @@ jobs:
         run: arm-none-eabi-strip target/armv7-unknown-linux-musleabihf/release/bustd
           
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 'bustd-linux-armv7-musl'
           path: target/armv7-unknown-linux-musleabihf/release/bustd
@@ -104,7 +104,7 @@ jobs:
         run: strip target/x86_64-unknown-linux-musl/release/bustd
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 'bustd-x86-64-musl'
           path: target/x86_64-unknown-linux-musl/release/bustd
@@ -141,7 +141,7 @@ jobs:
         run: strip target/release/bustd
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 'bustd-x86-64-glibc'
           path: target/release/bustd
@@ -184,7 +184,7 @@ jobs:
             target/release/bustd=/usr/bin/bustd
 
       - name: Upload RPM Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 'bustd-fedora-rpm'
           path: '*.rpm'
