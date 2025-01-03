@@ -145,3 +145,46 @@ jobs:
         with:
           name: 'bustd-x86-64-glibc'
           path: target/release/bustd
+
+  fedora-rpm:
+    name: Fedora RPM Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install Ruby and FPM
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby ruby-dev rubygems build-essential
+          sudo gem install --no-document fpm
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build Release Binary
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+
+      - name: Create RPM Package
+        run: |
+          VERSION=$(grep '^version =' Cargo.toml | cut -d '"' -f2)
+          fpm -s dir -t rpm \
+            --name bustd \
+            --version $VERSION \
+            --architecture x86_64 \
+            --description "Lightweight process killer daemon for out-of-memory scenarios" \
+            --url "https://github.com/vrmiguel/bustd" \
+            --maintainer "Vinícius R. Miguel <vrmiguel99@gmail.com>" \
+            --license MIT \
+            target/release/bustd=/usr/bin/bustd
+
+      - name: Upload RPM Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'bustd-fedora-rpm'
+          path: '*.rpm'
