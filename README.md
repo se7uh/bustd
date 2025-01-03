@@ -1,4 +1,4 @@
-# `bustd`: Available memory or bust!
+# `bustd`: Available memory or bust! 
 
 `bustd` is a lightweight process killer daemon for out-of-memory scenarios for Linux!
 
