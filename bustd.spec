@@ -6,10 +6,15 @@ Summary:        A system daemon for memory management
 License:        MIT
 URL:            https://github.com/se7uh/bustd
 Source0:        %{url}/archive/master.tar.gz
+Source1:        bustd.service
 
 BuildRequires:  gcc
 BuildRequires:  cargo
 BuildRequires:  rust
+BuildRequires:  systemd-rpm-macros
+
+# Runtime requirements
+Requires:       systemd
 
 %description
 bustd is a lightweight process killer daemon for out-of-memory scenarios for Linux.
@@ -23,7 +28,7 @@ cargo build --release
 %install
 rm -rf $RPM_BUILD_ROOT
 install -D -m 755 target/release/%{name} %{buildroot}%{_bindir}/%{name}
-install -D -m 644 %{name}.service %{buildroot}%{_unitdir}/%{name}.service
+install -D -m 644 %{SOURCE1} %{buildroot}/%{_unitdir}/%{name}.service
 
 %files
 %license LICENSE
