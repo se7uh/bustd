@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        A system daemon for memory management
 
 License:        MIT
-URL:            https://github.com/vrmiguel/bustd
+URL:            https://github.com/se7uh/bustd
 Source0:        %{url}/archive/master.tar.gz
 
 BuildRequires:  gcc
